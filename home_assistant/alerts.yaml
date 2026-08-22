@@ -1,0 +1,46 @@
+alias: "Alert: Proxmox Thermal Warning"
+mode: queued
+trigger:
+  # --- CPU Triggers (>= 190°F for 5 mins) ---
+  - platform: numeric_state
+    entity_id: sensor.proxmox_node_1_cpu_temp
+    above: 190
+    for:
+      minutes: 5
+  - platform: numeric_state
+    entity_id: sensor.proxmox_node_2_cpu_temp
+    above: 190
+    for:
+      minutes: 5
+  - platform: numeric_state
+    entity_id: sensor.proxmox_node_3_cpu_temp
+    above: 190
+    for:
+      minutes: 5
+      
+  # --- NVMe Triggers (>= 155°F for 5 mins) ---
+  - platform: numeric_state
+    entity_id: sensor.proxmox_node_1_nvme_temp
+    above: 155
+    for:
+      minutes: 5
+  - platform: numeric_state
+    entity_id: sensor.proxmox_node_2_nvme_temp
+    above: 155
+    for:
+      minutes: 5
+  - platform: numeric_state
+    entity_id: sensor.proxmox_node_3_nvme_temp
+    above: 155
+    for:
+      minutes: 5
+      
+action:
+  - service: notify.pushover
+    data:
+      title: "🔥 Proxmox Thermal Alert"
+      message: >
+        {{ trigger.to_state.name }} has been running hot at {{ trigger.to_state.state }}°F for over 5 minutes.
+      data:
+        priority: 1
+        sound: "siren"
