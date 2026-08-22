@@ -1,0 +1,82 @@
+type: grid
+columns: 1
+square: false
+cards:
+  - type: vertical-stack
+    cards:
+      - type: markdown
+        content: "### 🖥️ Node 1 (NUC8i5)"
+      - type: horizontal-stack
+        cards:
+          - type: gauge
+            entity: sensor.proxmox_node_1_cpu_temp
+            name: CPU Temp
+            needle: true
+            min: 60
+            max: 215
+            severity:
+              green: 60
+              yellow: 155
+              red: 185
+          - type: gauge
+            entity: sensor.proxmox_node_1_nvme_temp
+            name: NVMe Temp
+            needle: true
+            min: 60
+            max: 180
+            severity:
+              green: 60
+              yellow: 115
+              red: 145
+  - type: vertical-stack
+    cards:
+      - type: markdown
+        content: "### 🖥️ Node 2 (NUC8i7)"
+      - type: horizontal-stack
+        cards:
+          - type: gauge
+            entity: sensor.proxmox_node_2_cpu_temp
+            name: CPU Temp
+            needle: true
+            min: 60
+            max: 215
+            severity:
+              green: 60
+              yellow: 155
+              red: 185
+          - type: gauge
+            entity: sensor.proxmox_node_2_nvme_temp
+            name: NVMe Temp
+            needle: true
+            min: 60
+            max: 180
+            severity:
+              green: 60
+              yellow: 115
+              red: 145
+  - type: vertical-stack
+    cards:
+      - type: markdown
+        content: "### 🖥️ Node 3 (NUC8i7)"
+      - type: horizontal-stack
+        cards:
+          - type: gauge
+            entity: sensor.proxmox_node_3_cpu_temp
+            name: CPU Temp
+            needle: true
+            min: 60
+            max: 215
+            severity:
+              green: 60
+              yellow: 155
+              red: 185
+          - type: gauge
+            entity: sensor.proxmox_node_3_nvme_temp
+            name: NVMe Temp
+            needle: true
+            min: 60
+            max: 180
+            severity:
+              green: 60
+              yellow: 115
+              red: 145
