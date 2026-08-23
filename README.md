@@ -47,8 +47,16 @@ Once installed, you must run the automated detection tool so Linux can map your 
 sensors-detect --auto
 ```
 
-### Configure SSH Access
-Home Assistant must be able to SSH into your Proxmox nodes without a password. Generate an RSA key inside your Home Assistant `/config/.ssh` directory and append the public key to the `/root/.ssh/authorized_keys` file on each Proxmox node.
+### 🛡️ Security Best Practice: Restrict SSH Access
+Home Assistant must be able to SSH into your Proxmox nodes without a password. First, generate an RSA key inside your Home Assistant `/config/.ssh` directory. 
+
+When appending the public key to the `/root/.ssh/authorized_keys` file on each Proxmox node, **do not grant full root access**. Instead, prepend command restrictions to the public key so it can *only* execute the metrics script. 
+
+Your entry in `/root/.ssh/authorized_keys` should look like this (replace `ssh-rsa AAAAB3...` with your actual public key):
+```text
+command="/usr/local/bin/ha_metrics.sh",no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty ssh-rsa AAAAB3NzaC1...
+```
+*This ensures that even if your Home Assistant instance is compromised, the SSH key cannot be used to gain a root shell or alter your Proxmox hypervisor.*
 
 ---
 
