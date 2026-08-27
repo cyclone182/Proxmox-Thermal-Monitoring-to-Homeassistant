@@ -2,81 +2,209 @@ type: grid
 columns: 1
 square: false
 cards:
+  # --- NODE 1 ---
   - type: vertical-stack
     cards:
       - type: markdown
-        content: "### 🖥️ Node 1 (NUC8i5)"
+        content: '### 🖥️ Node 1 (NUC8i5)'
       - type: horizontal-stack
         cards:
-          - type: gauge
-            entity: sensor.proxmox_node_1_cpu_temp
-            name: CPU Temp
-            needle: true
-            min: 60
-            max: 215
-            severity:
-              green: 60
-              yellow: 155
-              red: 185
-          - type: gauge
-            entity: sensor.proxmox_node_1_nvme_temp
-            name: NVMe Temp
-            needle: true
-            min: 60
-            max: 180
-            severity:
-              green: 60
-              yellow: 115
-              red: 145
+          # Node 1 CPU Temp
+          - type: vertical-stack
+            cards:
+              - type: conditional
+                conditions:
+                  - condition: numeric_state
+                    entity: sensor.proxmox_node_1_cpu_temp
+                    above: -100
+                card:
+                  type: gauge
+                  entity: sensor.proxmox_node_1_cpu_temp
+                  name: CPU Temp
+                  needle: true
+                  min: 60
+                  max: 215
+                  severity:
+                    green: 60
+                    yellow: 155
+                    red: 185
+              - type: conditional
+                conditions:
+                  - condition: state
+                    entity: sensor.proxmox_node_1_cpu_temp
+                    state:
+                      - unavailable
+                      - unknown
+                      - 'null'
+                card:
+                  type: picture
+                  image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100'%3E%3Crect width='200' height='100' fill='%23D97706'/%3E%3Ctext x='100' y='52' dominant-baseline='middle' text-anchor='middle' fill='white' font-weight='bold' font-family='sans-serif' font-size='24'%3ESENSOR ERROR%3C/text%3E%3C/svg%3E"
+          
+          # Node 1 NVMe Temp
+          - type: vertical-stack
+            cards:
+              - type: conditional
+                conditions:
+                  - condition: numeric_state
+                    entity: sensor.proxmox_node_1_nvme_temp
+                    above: -100
+                card:
+                  type: gauge
+                  entity: sensor.proxmox_node_1_nvme_temp
+                  name: NVMe Temp
+                  needle: true
+                  min: 60
+                  max: 180
+                  severity:
+                    green: 60
+                    yellow: 115
+                    red: 145
+              - type: conditional
+                conditions:
+                  - condition: state
+                    entity: sensor.proxmox_node_1_nvme_temp
+                    state:
+                      - unavailable
+                      - unknown
+                      - 'null'
+                card:
+                  type: picture
+                  image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100'%3E%3Crect width='200' height='100' fill='%23D97706'/%3E%3Ctext x='100' y='52' dominant-baseline='middle' text-anchor='middle' fill='white' font-weight='bold' font-family='sans-serif' font-size='24'%3ESENSOR ERROR%3C/text%3E%3C/svg%3E"
+
+  # --- NODE 2 ---
   - type: vertical-stack
     cards:
       - type: markdown
-        content: "### 🖥️ Node 2 (NUC8i7)"
+        content: '### 🖥️ Node 2 (NUC8i7)'
       - type: horizontal-stack
         cards:
-          - type: gauge
-            entity: sensor.proxmox_node_2_cpu_temp
-            name: CPU Temp
-            needle: true
-            min: 60
-            max: 215
-            severity:
-              green: 60
-              yellow: 155
-              red: 185
-          - type: gauge
-            entity: sensor.proxmox_node_2_nvme_temp
-            name: NVMe Temp
-            needle: true
-            min: 60
-            max: 180
-            severity:
-              green: 60
-              yellow: 115
-              red: 145
+          # Node 2 CPU Temp
+          - type: vertical-stack
+            cards:
+              - type: conditional
+                conditions:
+                  - condition: numeric_state
+                    entity: sensor.proxmox_node_2_cpu_temp
+                    above: -100
+                card:
+                  type: gauge
+                  entity: sensor.proxmox_node_2_cpu_temp
+                  name: CPU Temp
+                  needle: true
+                  min: 60
+                  max: 215
+                  severity:
+                    green: 60
+                    yellow: 155
+                    red: 185
+              - type: conditional
+                conditions:
+                  - condition: state
+                    entity: sensor.proxmox_node_2_cpu_temp
+                    state:
+                      - unavailable
+                      - unknown
+                      - 'null'
+                card:
+                  type: picture
+                  image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100'%3E%3Crect width='200' height='100' fill='%23D97706'/%3E%3Ctext x='100' y='52' dominant-baseline='middle' text-anchor='middle' fill='white' font-weight='bold' font-family='sans-serif' font-size='24'%3ESENSOR ERROR%3C/text%3E%3C/svg%3E"
+          
+          # Node 2 NVMe Temp
+          - type: vertical-stack
+            cards:
+              - type: conditional
+                conditions:
+                  - condition: numeric_state
+                    entity: sensor.proxmox_node_2_nvme_temp
+                    above: -100
+                card:
+                  type: gauge
+                  entity: sensor.proxmox_node_2_nvme_temp
+                  name: NVMe Temp
+                  needle: true
+                  min: 60
+                  max: 180
+                  severity:
+                    green: 60
+                    yellow: 115
+                    red: 145
+              - type: conditional
+                conditions:
+                  - condition: state
+                    entity: sensor.proxmox_node_2_nvme_temp
+                    state:
+                      - unavailable
+                      - unknown
+                      - 'null'
+                card:
+                  type: picture
+                  image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100'%3E%3Crect width='200' height='100' fill='%23D97706'/%3E%3Ctext x='100' y='52' dominant-baseline='middle' text-anchor='middle' fill='white' font-weight='bold' font-family='sans-serif' font-size='24'%3ESENSOR ERROR%3C/text%3E%3C/svg%3E"
+
+  # --- NODE 3 ---
   - type: vertical-stack
     cards:
       - type: markdown
-        content: "### 🖥️ Node 3 (NUC8i7)"
+        content: '### 🖥️ Node 3 (NUC8i7)'
       - type: horizontal-stack
         cards:
-          - type: gauge
-            entity: sensor.proxmox_node_3_cpu_temp
-            name: CPU Temp
-            needle: true
-            min: 60
-            max: 215
-            severity:
-              green: 60
-              yellow: 155
-              red: 185
-          - type: gauge
-            entity: sensor.proxmox_node_3_nvme_temp
-            name: NVMe Temp
-            needle: true
-            min: 60
-            max: 180
-            severity:
-              green: 60
-              yellow: 115
-              red: 145
+          # Node 3 CPU Temp
+          - type: vertical-stack
+            cards:
+              - type: conditional
+                conditions:
+                  - condition: numeric_state
+                    entity: sensor.proxmox_node_3_cpu_temp
+                    above: -100
+                card:
+                  type: gauge
+                  entity: sensor.proxmox_node_3_cpu_temp
+                  name: CPU Temp
+                  needle: true
+                  min: 60
+                  max: 215
+                  severity:
+                    green: 60
+                    yellow: 155
+                    red: 185
+              - type: conditional
+                conditions:
+                  - condition: state
+                    entity: sensor.proxmox_node_3_cpu_temp
+                    state:
+                      - unavailable
+                      - unknown
+                      - 'null'
+                card:
+                  type: picture
+                  image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100'%3E%3Crect width='200' height='100' fill='%23D97706'/%3E%3Ctext x='100' y='52' dominant-baseline='middle' text-anchor='middle' fill='white' font-weight='bold' font-family='sans-serif' font-size='24'%3ESENSOR ERROR%3C/text%3E%3C/svg%3E"
+          
+          # Node 3 NVMe Temp
+          - type: vertical-stack
+            cards:
+              - type: conditional
+                conditions:
+                  - condition: numeric_state
+                    entity: sensor.proxmox_node_3_nvme_temp
+                    above: -100
+                card:
+                  type: gauge
+                  entity: sensor.proxmox_node_3_nvme_temp
+                  name: NVMe Temp
+                  needle: true
+                  min: 60
+                  max: 180
+                  severity:
+                    green: 60
+                    yellow: 115
+                    red: 145
+              - type: conditional
+                conditions:
+                  - condition: state
+                    entity: sensor.proxmox_node_3_nvme_temp
+                    state:
+                      - unavailable
+                      - unknown
+                      - 'null'
+                card:
+                  type: picture
+                  image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100'%3E%3Crect width='200' height='100' fill='%23D97706'/%3E%3Ctext x='100' y='52' dominant-baseline='middle' text-anchor='middle' fill='white' font-weight='bold' font-family='sans-serif' font-size='24'%3ESENSOR ERROR%3C/text%3E%3C/svg%3E"
