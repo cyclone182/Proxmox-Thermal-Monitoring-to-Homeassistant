@@ -1,0 +1,54 @@
+command_line:
+  - sensor:
+      name: "Proxmox Node 1 CPU Temp"
+      command: 'ssh -i /config/.ssh/proxmox_key -o StrictHostKeyChecking=no -q root@<YOUR_NODE_1_IP> "/usr/local/bin/ha_metrics.sh"'
+      unit_of_measurement: "°F"
+      value_template: "{{ value_json.cpu_temp }}"
+      json_attributes:
+        - nvme_temp
+        - cpu_freq
+        - pve_governor
+      device_class: temperature
+      state_class: measurement
+      scan_interval: 60
+
+  - switch:
+      name: PVE1 Performance Mode
+      command_on: 'ssh -i /config/.ssh/proxmox_key -o StrictHostKeyChecking=no -q root@<YOUR_NODE_1_IP> "/usr/local/bin/thermal_throttle.sh restore"'
+      command_off: 'ssh -i /config/.ssh/proxmox_key -o StrictHostKeyChecking=no -q root@<YOUR_NODE_1_IP> "/usr/local/bin/thermal_throttle.sh throttle"'
+
+  - sensor:
+      name: "Proxmox Node 2 CPU Temp"
+      command: 'ssh -i /config/.ssh/proxmox_key -o StrictHostKeyChecking=no -q root@<YOUR_NODE_2_IP> "/usr/local/bin/ha_metrics.sh"'
+      unit_of_measurement: "°F"
+      value_template: "{{ value_json.cpu_temp }}"
+      json_attributes:
+        - nvme_temp
+        - cpu_freq
+        - pve_governor
+      device_class: temperature
+      state_class: measurement
+      scan_interval: 60
+
+  - switch:
+      name: PVE2 Performance Mode
+      command_on: 'ssh -i /config/.ssh/proxmox_key -o StrictHostKeyChecking=no -q root@<YOUR_NODE_2_IP> "/usr/local/bin/thermal_throttle.sh restore"'
+      command_off: 'ssh -i /config/.ssh/proxmox_key -o StrictHostKeyChecking=no -q root@<YOUR_NODE_2_IP> "/usr/local/bin/thermal_throttle.sh throttle"'
+
+  - sensor:
+      name: "Proxmox Node 3 CPU Temp"
+      command: 'ssh -i /config/.ssh/proxmox_key -o StrictHostKeyChecking=no -q root@<YOUR_NODE_3_IP> "/usr/local/bin/ha_metrics.sh"'
+      unit_of_measurement: "°F"
+      value_template: "{{ value_json.cpu_temp }}"
+      json_attributes:
+        - nvme_temp
+        - cpu_freq
+        - pve_governor
+      device_class: temperature
+      state_class: measurement
+      scan_interval: 60
+
+  - switch:
+      name: PVE3 Performance Mode
+      command_on: 'ssh -i /config/.ssh/proxmox_key -o StrictHostKeyChecking=no -q root@<YOUR_NODE_3_IP> "/usr/local/bin/thermal_throttle.sh restore"'
+      command_off: 'ssh -i /config/.ssh/proxmox_key -o StrictHostKeyChecking=no -q root@<YOUR_NODE_3_IP> "/usr/local/bin/thermal_throttle.sh throttle"'
