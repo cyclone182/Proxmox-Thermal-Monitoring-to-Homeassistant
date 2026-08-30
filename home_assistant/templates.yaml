@@ -1,0 +1,44 @@
+- sensor:
+    - name: "Proxmox Node 1 NVMe Temp"
+      unit_of_measurement: "°F"
+      device_class: temperature
+      state_class: measurement
+      state: "{{ state_attr('sensor.proxmox_node_1_cpu_temp', 'nvme_temp') }}"
+
+    - name: "Proxmox Node 2 NVMe Temp"
+      unit_of_measurement: "°F"
+      device_class: temperature
+      state_class: measurement
+      state: "{{ state_attr('sensor.proxmox_node_2_cpu_temp', 'nvme_temp') }}"
+
+    - name: "Proxmox Node 3 NVMe Temp"
+      unit_of_measurement: "°F"
+      device_class: temperature
+      state_class: measurement
+      state: "{{ state_attr('sensor.proxmox_node_3_cpu_temp', 'nvme_temp') }}"
+
+    - name: "Proxmox Node 1 Governor"
+      state: "{{ state_attr('sensor.proxmox_node_1_cpu_temp', 'pve_governor') }}"
+
+    - name: "Proxmox Node 2 Governor"
+      state: "{{ state_attr('sensor.proxmox_node_2_cpu_temp', 'pve_governor') }}"
+
+    - name: "Proxmox Node 3 Governor"
+      state: "{{ state_attr('sensor.proxmox_node_3_cpu_temp', 'pve_governor') }}"
+
+- switch:
+    - name: "pve1_performance_mode"
+      turn_on:
+        service: shell_command.pve_node1_restore
+      turn_off:
+        service: shell_command.pve_node1_throttle
+    - name: "pve2_performance_mode"
+      turn_on:
+        service: shell_command.pve_node2_restore
+      turn_off:
+        service: shell_command.pve_node2_throttle
+    - name: "pve3_performance_mode"
+      turn_on:
+        service: shell_command.pve_node3_restore
+      turn_off:
+        service: shell_command.pve_node3_throttle
