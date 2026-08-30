@@ -12,11 +12,6 @@ command_line:
       state_class: measurement
       scan_interval: 60
 
-  - switch:
-      name: PVE1 Performance Mode
-      command_on: 'ssh -i /config/.ssh/proxmox_key -o StrictHostKeyChecking=no -q root@<YOUR_NODE_1_IP> "/usr/local/bin/thermal_throttle.sh restore"'
-      command_off: 'ssh -i /config/.ssh/proxmox_key -o StrictHostKeyChecking=no -q root@<YOUR_NODE_1_IP> "/usr/local/bin/thermal_throttle.sh throttle"'
-
   - sensor:
       name: "Proxmox Node 2 CPU Temp"
       command: 'ssh -i /config/.ssh/proxmox_key -o StrictHostKeyChecking=no -q root@<YOUR_NODE_2_IP> "/usr/local/bin/ha_metrics.sh"'
@@ -29,11 +24,6 @@ command_line:
       device_class: temperature
       state_class: measurement
       scan_interval: 60
-
-  - switch:
-      name: PVE2 Performance Mode
-      command_on: 'ssh -i /config/.ssh/proxmox_key -o StrictHostKeyChecking=no -q root@<YOUR_NODE_2_IP> "/usr/local/bin/thermal_throttle.sh restore"'
-      command_off: 'ssh -i /config/.ssh/proxmox_key -o StrictHostKeyChecking=no -q root@<YOUR_NODE_2_IP> "/usr/local/bin/thermal_throttle.sh throttle"'
 
   - sensor:
       name: "Proxmox Node 3 CPU Temp"
@@ -48,7 +38,10 @@ command_line:
       state_class: measurement
       scan_interval: 60
 
-  - switch:
-      name: PVE3 Performance Mode
-      command_on: 'ssh -i /config/.ssh/proxmox_key -o StrictHostKeyChecking=no -q root@<YOUR_NODE_3_IP> "/usr/local/bin/thermal_throttle.sh restore"'
-      command_off: 'ssh -i /config/.ssh/proxmox_key -o StrictHostKeyChecking=no -q root@<YOUR_NODE_3_IP> "/usr/local/bin/thermal_throttle.sh throttle"'
+shell_command:
+  pve_node1_restore: 'ssh -i /config/.ssh/proxmox_key -o StrictHostKeyChecking=no -q root@<YOUR_NODE_1_IP> "/usr/local/bin/thermal_throttle.sh restore"'
+  pve_node1_throttle: 'ssh -i /config/.ssh/proxmox_key -o StrictHostKeyChecking=no -q root@<YOUR_NODE_1_IP> "/usr/local/bin/thermal_throttle.sh throttle"'
+  pve_node2_restore: 'ssh -i /config/.ssh/proxmox_key -o StrictHostKeyChecking=no -q root@<YOUR_NODE_2_IP> "/usr/local/bin/thermal_throttle.sh restore"'
+  pve_node2_throttle: 'ssh -i /config/.ssh/proxmox_key -o StrictHostKeyChecking=no -q root@<YOUR_NODE_2_IP> "/usr/local/bin/thermal_throttle.sh throttle"'
+  pve_node3_restore: 'ssh -i /config/.ssh/proxmox_key -o StrictHostKeyChecking=no -q root@<YOUR_NODE_3_IP> "/usr/local/bin/thermal_throttle.sh restore"'
+  pve_node3_throttle: 'ssh -i /config/.ssh/proxmox_key -o StrictHostKeyChecking=no -q root@<YOUR_NODE_3_IP> "/usr/local/bin/thermal_throttle.sh throttle"'
