@@ -29,7 +29,8 @@ Instead of installing heavy monitoring agents on the Proxmox hosts, this approac
     ├── 📄 configuration.yaml    <-- (HA command-line sensors & switches)
     ├── 📄 templates.yaml        <-- (Attribute extraction sensors)
     ├── 📄 dashboard.yaml        <-- (Grid card UI code)
-    └── 📄 automations.yaml      <-- (Closed-loop throttling logic)
+    ├── 📄 automations.yaml      <-- (Closed-loop throttling logic)
+    └── 📄 alerts.yaml           <-- (Pushover thermal alerts logic)
 ```
 
 ---
@@ -85,6 +86,9 @@ To create the visual gauges and governance controls, create a new **Manual** vie
 
 ### Automations
 To enable closed-loop governance, create a new automation in Home Assistant, switch to the YAML editor, and paste the contents of `home_assistant/automations.yaml`. This automation monitors the CPU sensors and automatically forces the respective Proxmox node into `powersave` mode if temperatures exceed 185°F, restoring it to `performance` mode only when temperatures drop below 155°F.
+
+### Thermal Alerts (Pushover)
+To receive notifications for sustained high temperatures, add the automation found in `home_assistant/alerts.yaml`. This automation monitors your cluster and sends a Pushover alert if a node's CPU temperature stays above 190°F for 5 minutes, or if an NVMe drive temperature exceeds 155°F for 5 minutes. This delay prevents alert fatigue from brief thermal spikes.
 
 ---
 
